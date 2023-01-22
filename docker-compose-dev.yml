@@ -7,8 +7,8 @@
 #    ports:
 #      - "5432:5432"
 #    environment:
-#      POSTGRES_USER: ${POSTGRES_USER_DEV}
-#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_DEV}
+#      POSTGRES_USER: ${POSTGRES_USER}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 #    volumes:
 #      - "./dist/postgresql/data/:/var/lib/postgresql/data"
 #  nginx:

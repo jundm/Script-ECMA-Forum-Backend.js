@@ -6,6 +6,6 @@ under work
 
 ### .env.dev
 
-POSTGRES_USER_DEV="jun"
-POSTGRES_PASSWORD_DEV="tjdwns11"
+POSTGRES_USER="jun"
+POSTGRES_PASSWORD="tjdwns11"
 
