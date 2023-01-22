@@ -1,0 +1,25 @@
+#version: "3"
+#services:
+#  backend:
+#    build:
+##      context: ./sef_backend
+#      dockerfile: Dockerfile
+#    ports :
+#      - "8080:8080"
+##    env_file:
+##      - .env
+
+# dev 이동 예정
+version: "3"
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER_DEV}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_DEV}
+    volumes:
+      - "./dist/postgresql/data/:/var/lib/postgresql/data"
