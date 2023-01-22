@@ -1,15 +1,22 @@
 import express, {NextFunction, Request, Response} from 'express';
+import morgan from "morgan";
 
 const app = express();
 
-app.get('/welcome', (req: Request, res: Response, Next: NextFunction) => {
+app.use(express.json());
+app.use(morgan("dev"));
+
+
+app.get('/', (req: Request, res: Response, Next: NextFunction) => {
   res.send('welcome!');
 });
 
-app.listen('8080', () => {
+let port = 8080;
+
+app.listen(port,() => {
   console.log(`
   ################################################
-  🛡️  Server listening on port: 8080🛡️
-      http://localhost:8080
+  🛡️  Server listening on port: ${port}🛡️
+      http://localhost:${port}
   ################################################  `);
 });
