@@ -2,7 +2,7 @@ import "reflect-metadata"
 import { DataSource } from "typeorm"
 
 process.env.NODE_ENV = ( process.env.NODE_ENV && ( process.env.NODE_ENV ).trim().toLowerCase() == 'production' ) ? 'production' : 'development';
-require('dotenv').config({path: `.env.${process.env.NODE_ENV}`});
+require('dotenv').config({path: `../.env.${process.env.NODE_ENV}`});
 console.log(process.env.NODE_ENV,'ho');
 export const AppDataSource = new DataSource({
     type: "postgres",
