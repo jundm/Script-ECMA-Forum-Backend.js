@@ -1,23 +1,28 @@
 import express, {NextFunction, Request, Response} from 'express';
 import morgan from "morgan";
-import {AppDataSource} from "./data-source";
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
+import {AppDataSource} from "@data-source";
+import swaggerOptions from '@swagger';
 
-process.env.NODE_ENV = ( process.env.NODE_ENV && ( process.env.NODE_ENV ).trim().toLowerCase() == 'production' ) ? 'production' : 'development';
+process.env.NODE_ENV = (process.env.NODE_ENV && (process.env.NODE_ENV).trim().toLowerCase() == 'production') ? 'production' : 'development';
 require('dotenv').config();
 const app = express();
+const specs = swaggerJsdoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {explorer: true}));
 
 app.use(express.json());
 app.use(morgan("dev"));
 
 
 app.get('/', (req: Request, res: Response, Next: NextFunction) => {
-  res.send('welcome!');
+    res.send('welcome!');
 });
 
 let port = 8080;
 
-app.listen(port,() => {
-  console.log(`
+app.listen(port, () => {
+    console.log(`
   ################################################
       env: ${process.env.NODE_ENV}
   🛡️  Server listening on port: ${port}🛡️
@@ -25,10 +30,10 @@ app.listen(port,() => {
   ################################################  `);
 
 
-  AppDataSource.initialize().then(() => {
+    AppDataSource.initialize().then(() => {
 
-    console.log("database initialize!")
+        console.log("database initialize!");
 
-  }).catch(error => console.log(error))
+    }).catch((error: any) => console.log(error));
 
 });

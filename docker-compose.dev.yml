@@ -1,21 +1,21 @@
 version: "3"
 services:
-  nginx:
-    image: nginx:stable
-    ports:
-      - "80:80"
-    volumes:
-      - "./nginx/nginx.dev.conf"
-  db:
-    image: postgres:latest
-    container_name: postgres
-    restart: always
-    ports:
-      - "5432:5432"
-    volumes:
-      - "./dist/postgresql/data/:/var/lib/postgresql/data"
-    depends_on:
-      - backend
+#  nginx:
+#    image: nginx:stable
+#    ports:
+#      - "80:80"
+#    volumes:
+#      - "./nginx/nginx.dev.conf"
+#  db:
+#    image: postgres:latest
+#    container_name: postgres
+#    restart: always
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - "./dist/postgresql/data/:/var/lib/postgresql/data"
+#    depends_on:
+#      - backend
   backend:
     image: junboss/sef:0.1.1
     build:
@@ -27,5 +27,5 @@ services:
       - './backend:/app'
       - '/app/node_modules'
 #    env_file:
-#      - .env.development
-#      - .env.production
+#      - .env.development.development
+#      - .env.development.production

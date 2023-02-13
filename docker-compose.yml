@@ -16,11 +16,13 @@ services:
       image: junboss/sef:0.1.1
       build:
         context: ./backend
-        dockerfile: backend/Dockerfile.dev
+        dockerfile: Dockerfile.dev
       ports :
         - "8080:8080"
       volumes:
         - './backend:/app'
         - '/app/node_modules'
+      depends_on:
+        - db
   #    env_file:
-  #      - .env.production
+  #      - .env.development.production
