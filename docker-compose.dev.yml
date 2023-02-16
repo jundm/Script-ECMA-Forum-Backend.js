@@ -5,7 +5,7 @@ services:
 #    ports:
 #      - "80:80"
 #    volumes:
-#      - "./nginx/nginx.dev.conf"
+#      - "./nginx/nginx.conf"
 #  db:
 #    image: postgres:latest
 #    container_name: postgres
