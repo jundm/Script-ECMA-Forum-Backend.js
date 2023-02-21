@@ -1,0 +1,24 @@
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - name
+        - email
+        - password
+      properties:
+        name:
+          type: string
+          description: 가입을 위한 이름을 입력합니다. 이름은 유일해야 합니다.
+        email:
+          type: string
+          format: email
+          description: 가입을 위한 이메일을 입력합니다. 이메일은 유일해야 합니다.
+        password:
+          type: string
+          format: password
+          description: 비밀번호를 6자 이상 입력합니다.
+      example:
+        name: devjun
+        email: devjun@email.com
+        password: 123456

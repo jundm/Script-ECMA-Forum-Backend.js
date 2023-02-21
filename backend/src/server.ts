@@ -1,18 +1,20 @@
 import express, {NextFunction, Request, Response} from 'express';
 import morgan from "morgan";
-import swaggerUi from 'swagger-ui-express';
-import swaggerJsdoc from 'swagger-jsdoc';
 import {AppDataSource} from "@data-source";
-import swaggerOptions from '@swagger';
+import {specs, swaggerUi} from "@swagger/index";
+import auth from "@routes/auth";
+import post from "@routes/post";
 
 process.env.NODE_ENV = (process.env.NODE_ENV && (process.env.NODE_ENV).trim().toLowerCase() == 'production') ? 'production' : 'development';
 require('dotenv').config();
 const app = express();
-const specs = swaggerJsdoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {explorer: true}));
 
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(express.static("public"));
+app.use('/api/auth', auth);
+app.use('/api/post', post);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {explorer: true}));
 
 
 app.get('/', (req: Request, res: Response, Next: NextFunction) => {
@@ -28,7 +30,6 @@ app.listen(port, () => {
   🛡️  Server listening on port: ${port}🛡️
       http://localhost:${port}
   ################################################  `);
-
 
     AppDataSource.initialize().then(() => {
 
