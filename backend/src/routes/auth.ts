@@ -2,60 +2,57 @@ import {Router} from "express";
 import {login, register} from "@controller/auth";
 
 const auth = Router();
-/**
- * @swagger
- * components:
- *   schemas:
- *     AuthDto:
- *       type: object
- *       properties:
- *         username:
- *           type: string
- *           description: Username for user
- *         email:
- *           type: string
- *           description: Username for user
- *         password:
- *           type: string
- *           description: Password for user
- */
 
 /**
  * @swagger
  * /api/auth/register:
  *   post:
- *     tags: [Auth]
- *     summary: User authentication for generate token
- *     produces:
- *       - application/json
+ *     tags:
+ *       - Auth
+ *     summary: Create a new user
+ *     description: Create a new user with the given name, email and password
+ *     operationId: registerUser
  *     requestBody:
- *            description: 사용자가 서버로 전달하는 값에 따라 결과 값은 다릅니다. (유저 등록)
- *        required: true
- *        content:
- *          application/x-www-form-urlencoded:
- *            schema:
- *              type: object
- *              properties:
- *              - name:
- *                type:string
- *              - email:
- *                type:string
- *              - password:
- *                type:string
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
  *     responses:
  *       200:
- *         description: Token generated
- *         schema:
- *           type: object
- *           schema:
- *             $ref:
- *               - '#/components/User'
- *       400:
- *         description: Some validation was threw
- *       500:
- *         description: An error has occurred during the process
- *
+ *         description: User created successfully.
  */
 auth.post("/register", register);
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     summary: Login to the application
+ *     description: Login to the application with the given email and password
+ *     tags:
+ *       - Auth
+ *     operationId: loginUser
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: User logged in successfully.
+ *       401:
+ *         description: Invalid email or password.
+ */
 auth.post("/login", login);
 export default auth;

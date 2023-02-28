@@ -55,7 +55,6 @@ const login = async (req: Request, res: Response) => {
         const user = await User.findOneBy({username});
         if (!user) return res.status(404).json({username: "사용자 이름이 등록되지 않았습니다."});
         // 유저가 있다면 비밀번호 비교하기
-        // @ts-ignore
         // let passwordMatches = await bcrypt.compare(password, user.password);
         const passwordMatches = password === user.password;
         // 비밀번호가 다르다면 에러 보내기
@@ -71,7 +70,7 @@ const login = async (req: Request, res: Response) => {
             maxAge: 60 * 60 * 24 * 7,
             path: "/"
         }));
-        return res.status(200).json({user, token});
+        return res.status(200).json({token});
 
     } catch (error) {
         console.error(error);
